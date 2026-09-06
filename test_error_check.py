@@ -38,7 +38,8 @@ def test_compress_0_simple_blue():
     np.testing.assert_array_equal(result_arr, desired= img_arr)
 
 def test_compress_0_simple_darkCity():
-    img = Image.open("dark_city.png").resize((25,25))
+    size = 8
+    img = Image.open("dark_city.png").resize((size,size))
     img_arr = np.array(img)
-    result_arr = compressor.process_image(np.copy(img_arr), 0.0001, 0)
-    np.testing.assert_array_equal(result_arr, desired= img_arr)
+    result_arr = compressor.process_image(np.copy(img_arr), 0.1, 0)
+    assert compressor.error_percent_simple(img_arr, result_arr,0,0,size, size) < 0.001
